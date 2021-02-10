@@ -45,7 +45,7 @@ public class OscillatorPanel extends JPanel implements ActionListener {
 
     @Override
     public void actionPerformed(ActionEvent e) {
-        if (xPos >= oscDimension.width)
+        if (xPos >= oscDimension.width + 500)
             xPos = 0;
         else
             xPos += velocity;
