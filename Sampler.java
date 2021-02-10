@@ -18,17 +18,18 @@ public class Sampler extends Carrier {
         File fileIn = new File("newSample");
         try {
             AudioInputStream in = AudioSystem.getAudioInputStream(fileIn);
-            int bytesPerFrame = in.getFormat().getFrameSize() ==  AudioSystem.NOT_SPECIFIED ? 1 : in.getFormat().getFrameSize();
+            int bytesPerFrame = in.getFormat().getFrameSize() == AudioSystem.NOT_SPECIFIED ? 1
+                    : in.getFormat().getFrameSize();
             int numBytesRead = 0;
             int numFramesRead = 0;
-    // Try to read numBytes bytes from the file.
+            // Try to read numBytes bytes from the file.
             while ((numBytesRead = in.read(samples)) != -1) {
-      // Calculate the number of frames actually read.
-            numFramesRead = numBytesRead / bytesPerFrame;
-            totalFramesRead += numFramesRead;
+                // Calculate the number of frames actually read.
+                numFramesRead = numBytesRead / bytesPerFrame;
+                totalFramesRead += numFramesRead;
             }
-      // Here, do something useful with the audio data that's 
-      // now in the audioBytes array...
+            // Here, do something useful with the audio data that's
+            // now in the audioBytes array...
         } catch (UnsupportedAudioFileException e) {
             // TODO Auto-generated catch block
             e.printStackTrace();
