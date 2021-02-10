@@ -8,7 +8,7 @@ import java.awt.BasicStroke;
 import java.awt.*;
 
 public class OscillatorPanel extends JPanel implements ActionListener {
-    Dimension oscDimension = new Dimension(500, 350);
+    final Dimension oscDimension = new Dimension(500, 350);
     Timer timer;
     Oscillator a = new Carrier();
     int xPos = 0;
@@ -51,4 +51,5 @@ public class OscillatorPanel extends JPanel implements ActionListener {
             xPos += velocity;
         this.repaint();
     }
+
 }
