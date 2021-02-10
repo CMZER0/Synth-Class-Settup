@@ -21,8 +21,8 @@ public class PluginWindow extends JFrame implements Runnable {
         // Set Background
         backGround = new ImageIcon("BackGround.png").getImage();
         // Init OscillatorPanels
-        oscOne = new OscillatorPanel(Color.red);
-        oscTwo = new OscillatorPanel(Color.blue);
+        oscOne = new OscillatorPanel(Color.black);
+        oscTwo = new OscillatorPanel(Color.black);
         // Init Jframe Properties
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         this.setPreferredSize(windowDimension);
