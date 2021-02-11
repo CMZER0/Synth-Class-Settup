@@ -1,18 +1,17 @@
 import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
-import javax.swing.JPanel;
 import java.awt.*;
 
 public class PluginWindow extends JFrame implements Runnable {
     protected OscillatorPanel oscOne;
     protected OscillatorPanel oscTwo;
-    protected KnobPanel modPanel;
+    protected static KnobPanel modPanel;
     ImageIcon icon;
     Image backGround;
     Image knobOne;
     JLabel label;
-    final Dimension windowDimension = new Dimension(1045, 800);
+    Dimension windowDimension = new Dimension(1045, 800);
     // Dimension toolBarDimension = new Dimension(1000, 450);
 
     public PluginWindow() {
@@ -29,6 +28,7 @@ public class PluginWindow extends JFrame implements Runnable {
         oscOne = new OscillatorPanel(Color.black);
         oscTwo = new OscillatorPanel(Color.black);
         modPanel = new KnobPanel();
+        modPanel.setLayout(new BorderLayout(10, 10));
         // Init Jframe Properties
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         this.setPreferredSize(windowDimension);
@@ -50,7 +50,7 @@ public class PluginWindow extends JFrame implements Runnable {
     public void paint(Graphics g) {
         Graphics2D g2D = (Graphics2D) g;
         g2D.drawImage(backGround, 0, 0, null);
-        g2D.drawImage(knobOne, 500, 500, null);
+        // g2D.drawImage(knobOne, 500, 500, null);
         Graphics gMod = modPanel.getGraphics();
         modPanel.paint(gMod);
 
