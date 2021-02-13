@@ -29,16 +29,16 @@ public class OscillatorPanel extends JPanel implements ActionListener {
 
     @Override
     public void paint(Graphics g) {
-        Graphics2D g2D = (Graphics2D) g;
-        g2D.setColor(c);
-        g2D.fillRect(0, 0, oscDimension.width, oscDimension.height);
-        g2D.setColor(Color.WHITE);
-        g2D.setStroke(new BasicStroke(3));
-        g2D.drawLine(0, oscDimension.height / 2, oscDimension.width, oscDimension.height / 2);
-        g2D.drawImage(fader, xPos - 500, 0, null);
-        g2D.drawRect(0, 0, oscDimension.width, oscDimension.height);
+        Graphics2D Osc = (Graphics2D) g;
+        Osc.setColor(c);
+        Osc.fillRect(0, 0, oscDimension.width, oscDimension.height);
+        Osc.setColor(Color.WHITE);
+        Osc.setStroke(new BasicStroke(3));
+        Osc.drawLine(0, oscDimension.height / 2, oscDimension.width, oscDimension.height / 2);
+        Osc.drawImage(fader, xPos - 500, 0, null);
+        Osc.drawRect(0, 0, oscDimension.width, oscDimension.height);
 
-        // g2D.drawBytes(a.multiSample(a.samples), 0, (int) ((LFO) a).samplePeriod,
+        // Osc.drawBytes(a.multiSample(a.samples), 0, (int) ((LFO) a).samplePeriod,
         // (int) oscDimension.getWidth() / 2,
         // int) oscDimension.getHeight() / 2);
     }
