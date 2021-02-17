@@ -1,16 +1,17 @@
-import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JPanel;
+import javax.swing.ImageIcon;
 import java.awt.*;
 
 public class PluginWindow extends JFrame implements Runnable {
+    static final Dimension windowDimension = new Dimension(1045, 800);
     protected OscillatorPanel oscOne;
     protected OscillatorPanel oscTwo;
+    protected ControlPanel knobPanel;
     ImageIcon icon;
     Image backGround;
     JLabel label;
-    Dimension windowDimension = new Dimension(1045, 800);
-    // Dimension toolBarDimension = new Dimension(1000, 450);
 
     public PluginWindow() {
         // Set Icon
@@ -23,6 +24,8 @@ public class PluginWindow extends JFrame implements Runnable {
         // Init OscillatorPanels
         oscOne = new OscillatorPanel(Color.black);
         oscTwo = new OscillatorPanel(Color.black);
+        // Init Controls
+        knobPanel = new ControlPanel();
         // Init Jframe Properties
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         this.setPreferredSize(windowDimension);
@@ -33,28 +36,32 @@ public class PluginWindow extends JFrame implements Runnable {
         this.setIconImage(icon.getImage());
         this.add(oscOne);
         this.add(oscTwo);
+        this.add(knobPanel);
         // Pack Frame
         this.pack();
         // Jframe Execute Properties
         this.setLocationRelativeTo(null);
+
+    }
+
+    public static Dimension getWindowdimension() {
+        return windowDimension;
     }
 
     @Override
     public void paint(Graphics g) {
         Graphics2D g2D = (Graphics2D) g;
         g2D.drawImage(backGround, 0, 0, null);
+        // To paint a component, call it's paint method
+        knobPanel.paint(knobPanel.getGraphics());
+
     }
 
     @Override
     public void run() {
         while (this.isActive()) {
-            // // Create Graphics
-            // Graphics gOne = oscOne.getGraphics();
-            // Graphics gTwo = oscTwo.getGraphics();
-            // // Run Paint Menthods Here
-            // oscOne.paint(gOne);
-            // oscTwo.paint(gTwo);
             try {
+
                 Thread.sleep(25);
             } catch (InterruptedException e) {
                 e.printStackTrace();
