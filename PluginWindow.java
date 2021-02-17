@@ -5,13 +5,13 @@ import javax.swing.ImageIcon;
 import java.awt.*;
 
 public class PluginWindow extends JFrame implements Runnable {
+    static final Dimension windowDimension = new Dimension(1045, 800);
     protected OscillatorPanel oscOne;
     protected OscillatorPanel oscTwo;
-    protected KnobPanel knobOne;
+    protected ControlPanel knobPanel;
     ImageIcon icon;
     Image backGround;
     JLabel label;
-    Dimension windowDimension = new Dimension(1045, 800);
 
     public PluginWindow() {
         // Set Icon
@@ -24,8 +24,8 @@ public class PluginWindow extends JFrame implements Runnable {
         // Init OscillatorPanels
         oscOne = new OscillatorPanel(Color.black);
         oscTwo = new OscillatorPanel(Color.black);
-        // Init KnobPanels
-        knobOne = new KnobPanel();
+        // Init Controls
+        knobPanel = new ControlPanel();
         // Init Jframe Properties
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         this.setPreferredSize(windowDimension);
@@ -36,18 +36,25 @@ public class PluginWindow extends JFrame implements Runnable {
         this.setIconImage(icon.getImage());
         this.add(oscOne);
         this.add(oscTwo);
-        this.add(knobOne);
+        this.add(knobPanel);
         // Pack Frame
         this.pack();
         // Jframe Execute Properties
         this.setLocationRelativeTo(null);
+
+    }
+
+    public static Dimension getWindowdimension() {
+        return windowDimension;
     }
 
     @Override
     public void paint(Graphics g) {
         Graphics2D g2D = (Graphics2D) g;
         g2D.drawImage(backGround, 0, 0, null);
-        knobOne.paint(knobOne.getGraphics());
+        // To paint a component, call it's paint method
+        knobPanel.paint(knobPanel.getGraphics());
+
     }
 
     @Override
@@ -61,5 +68,4 @@ public class PluginWindow extends JFrame implements Runnable {
             }
         }
     }
-
 }

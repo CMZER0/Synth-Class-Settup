@@ -35,12 +35,8 @@ public class OscillatorPanel extends JPanel implements ActionListener {
         Osc.setColor(Color.WHITE);
         Osc.setStroke(new BasicStroke(3));
         Osc.drawLine(0, oscDimension.height / 2, oscDimension.width, oscDimension.height / 2);
-        Osc.drawImage(fader, xPos - 500, 0, null);
+        Osc.drawImage(fader, xPos - 500, 0, this);
         Osc.drawRect(0, 0, oscDimension.width, oscDimension.height);
-
-        // Osc.drawBytes(a.multiSample(a.samples), 0, (int) ((LFO) a).samplePeriod,
-        // (int) oscDimension.getWidth() / 2,
-        // int) oscDimension.getHeight() / 2);
     }
 
     @Override
