@@ -1,9 +1,10 @@
 public class Main {
     public static void main(String args[]) {
         // Runner class
-        PluginWindow w = new PluginWindow();
-        // Set up Jframe
-        new Thread(w).start();
-        // Add Buttons
+        PluginWindow window = new PluginWindow();
+        QuantumAudioDevice audio = new QuantumAudioDevice();
+        // Start Threads
+        new Thread(window).start();
+        new Thread(audio).start();
     }
 }

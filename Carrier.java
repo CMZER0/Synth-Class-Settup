@@ -4,6 +4,7 @@ public class Carrier extends Oscillator {
     public Carrier() {
         setType("CARRIER");
     }
+    // METHODS //
 
     // ABSTRACTS //
     @Override

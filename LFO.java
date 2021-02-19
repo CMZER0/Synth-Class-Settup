@@ -1,40 +1,25 @@
-public class LFO extends Modulator {
+public class LFO extends Carrier {
     int frequency;
-    double samplePeriod = 1.0 / sampleRate;
-    double duration = 0.002;
-    double durationInSamples = Math.ceil(duration * sampleRate);
-    double[] rawOutput;
+    Sine wave;
 
     // CONSTRUCTORS //
     public LFO() {
-        setType("LFO");
+        setType("SINE");
         setFrequency(440);
-        super.setSamples(multiSample(samples));
+        setWave(new Sine());
     }
 
     public LFO(int HZ) {
-        setType("LFO");
+        setType("SINE");
         setFrequency(HZ);
-        super.setSamples(multiSample(samples));
+        setWave(new Sine());
     }
+
+    // METHODS //
 
     // ABSTRACTS //
     @Override
     public byte[] multiSample(byte[] samples) {
-
-        rawOutput = new double[BUFFER_SIZE];
-        int time = 0;
-
-        for (int i = 0; i < durationInSamples; i++) {
-            // sample a sine wave at 440 hertz at each time tick
-            // substitute a function that generates a sawtooth as a function of time / freq
-            // rawOutput[i] = function_of_time(other_relevant_info, time);
-            rawOutput[i] = Math.sin(2 * Math.PI * frequency * time);
-            // System.out.println(rawOutput[i] + ", " + Math.sin(2 * Math.PI * frequency *
-            // time));
-            time += samplePeriod;
-        }
-
         return samples;
     }
 
@@ -45,6 +30,14 @@ public class LFO extends Modulator {
 
     public void setFrequency(int frequency) {
         this.frequency = frequency;
+    }
+
+    public Sine getWave() {
+        return wave;
+    }
+
+    public void setWave(Sine wave) {
+        this.wave = wave;
     }
 
 }

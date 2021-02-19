@@ -82,7 +82,7 @@ public class Knob extends JPanel {
             // checking position min / max
             minMaxValue();
             // debuging
-            System.out.println(Math.toDegrees(value) + ", " + Math.toDegrees(position));
+            //System.out.println(Math.toDegrees(value) + ", " + Math.toDegrees(position));
             // call repaint
             doRepaint();
         }
