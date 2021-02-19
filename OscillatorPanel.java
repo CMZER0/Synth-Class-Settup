@@ -16,7 +16,7 @@ public class OscillatorPanel extends JPanel implements ActionListener {
     Image fader;
     // Wave Graph Vars
     Oscillator sine = new LFO();
-    Sine sines = ((LFO) sine).getWave();
+    Sine sines = new Sine();
     double[] waveData = sines.getWaveData();
     int xPts = sines.getxPts();
     int[] yPts = sines.getyPts();

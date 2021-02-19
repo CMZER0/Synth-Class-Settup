@@ -9,9 +9,10 @@ public class QuantumAudioDevice implements Runnable {
     public void run() {
         System.out.println("Quantum is running!");
         a = new LFO();
-        a.recordAudioFile();
+        // a.recordAudioFile();
+        a.gerateAudioData();
 
-        System.out.println("Audio has been recorded");
+        // System.out.println("Audio has been recorded");
     }
 
 }

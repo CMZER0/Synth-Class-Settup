@@ -15,8 +15,8 @@ public abstract class Oscillator {
     static int numberOfChannels = 2;
     static int frameSizeInBytes = 4;
     // JAVA SOUND COMPONENTS //
-    public static Mixer mixer;
-    public static Clip clip;
+    // public static Mixer mixer;
+    // public static Clip clip;
 
     //////////////////
     // CONSTRUCTORS //
@@ -29,37 +29,65 @@ public abstract class Oscillator {
     /////////////
     // METHODS //
     /////////////
-    protected void gerateAudioData() throws LineUnavailableException {
-        File fileOut = new File("output");
+    protected void gerateAudioData() {
+        File file = new File(getType());
         AudioFormat format = new AudioFormat(AudioFormat.Encoding.PCM_SIGNED, sampleRate, sampleSize, numberOfChannels,
                 frameSizeInBytes, sampleRate, false);
-                DataLine.Info info = new DataLine.Info(TargetDataLine.class, format);
-                if (!AudioSystem.isLineSupported(info)) {
-                    System.out.println("Line Not Supported");
-                    System.exit(0);
-                }
-               f
+        // ByteArrayInputStream bytesIn = new ByteArrayInputStream(samples);
+        try {
+            DataLine.Info dataInfo = new DataLine.Info(Clip.class, format);
+            Clip outClip = (Clip) AudioSystem.getLine(dataInfo);
+            AudioInputStream audioStream = AudioSystem.getAudioInputStream(file);
+            int bytesPerFrame = audioStream.getFormat().getFrameSize();
+            if (bytesPerFrame == AudioSystem.NOT_SPECIFIED) {
+                bytesPerFrame = 1;
+            }
+            int numOfBytes = BUFFER_SIZE * bytesPerFrame;
+            setSamples(new byte[numOfBytes]);
+
+            int numBytesRead = 0;
+            int numFramesRead = 0;
+            int totalFramesRead = 0;
+
+            outClip.open(audioStream);
+            outClip.loop(1);
+            // while ((numBytesRead = audioStream.read(samples)) != -1) {
+            // numFramesRead = numBytesRead / bytesPerFrame;
+            // totalFramesRead += numFramesRead;
+            // ((SourceDataLine) outClip).write(samples, 0, samples.length);
+
+            // }
+            // outClip.drain();
+            // outClip.close();
+
+        } catch (UnsupportedAudioFileException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        } catch (LineUnavailableException e) {
+            e.printStackTrace();
+        }
     }
 
     protected static void readAudioFile() {
-        try {
-            Mixer.Info[] mixInfos = AudioSystem.getMixerInfo();
-            mixer = AudioSystem.getMixer(mixInfos[0]);
-            DataLine.Info dataInfo = new DataLine.Info(Clip.class, null);
-            clip = (Clip) mixer.getLine(dataInfo);
-            File file = new File("Test.wav");
-            AudioInputStream audioInputStream = AudioSystem.getAudioInputStream(file);
-            clip.open(audioInputStream);
-        } catch (LineUnavailableException e) {
-            // TODO Auto-generated catch block
-            e.printStackTrace();
-        } catch (IOException e) {
-            // TODO Auto-generated catch block
-            e.printStackTrace();
-        } catch (UnsupportedAudioFileException e) {
-            // TODO Auto-generated catch block
-            e.printStackTrace();
-        }
+        // try {
+        // Mixer.Info[] mixInfos = AudioSystem.getMixerInfo();
+        // mixer = AudioSystem.getMixer(mixInfos[0]);
+        // DataLine.Info dataInfo = new DataLine.Info(Clip.class, null);
+        // clip = (Clip) mixer.getLine(dataInfo);
+        // File file = new File("Test.wav");
+        // AudioInputStream audioInputStream = AudioSystem.getAudioInputStream(file);
+        // clip.open(audioInputStream);
+        // } catch (LineUnavailableException e) {
+        // // TODO Auto-generated catch block
+        // e.printStackTrace();
+        // } catch (IOException e) {
+        // // TODO Auto-generated catch block
+        // e.printStackTrace();
+        // } catch (UnsupportedAudioFileException e) {
+        // // TODO Auto-generated catch block
+        // e.printStackTrace();
+        // }
 
     }
 
