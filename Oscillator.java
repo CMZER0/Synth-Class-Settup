@@ -4,7 +4,7 @@ import javax.sound.midi.*;
 
 public abstract class Oscillator {
     String type = "DEFAULT";
-    byte[] samples;
+    public byte[] samples;
     byte sample;
     int BUFFER_SIZE;
     final int DEFAULT_BUFFER = 1024;
@@ -29,13 +29,25 @@ public abstract class Oscillator {
     /////////////
     // METHODS //
     /////////////
+    protected void gerateAudioData() throws LineUnavailableException {
+        File fileOut = new File("output");
+        AudioFormat format = new AudioFormat(AudioFormat.Encoding.PCM_SIGNED, sampleRate, sampleSize, numberOfChannels,
+                frameSizeInBytes, sampleRate, false);
+                DataLine.Info info = new DataLine.Info(TargetDataLine.class, format);
+                if (!AudioSystem.isLineSupported(info)) {
+                    System.out.println("Line Not Supported");
+                    System.exit(0);
+                }
+               f
+    }
+
     protected static void readAudioFile() {
         try {
             Mixer.Info[] mixInfos = AudioSystem.getMixerInfo();
             mixer = AudioSystem.getMixer(mixInfos[0]);
             DataLine.Info dataInfo = new DataLine.Info(Clip.class, null);
             clip = (Clip) mixer.getLine(dataInfo);
-            File file = new File("Osc.wav");
+            File file = new File("Test.wav");
             AudioInputStream audioInputStream = AudioSystem.getAudioInputStream(file);
             clip.open(audioInputStream);
         } catch (LineUnavailableException e) {

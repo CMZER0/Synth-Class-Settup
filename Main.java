@@ -6,5 +6,7 @@ public class Main {
         // Start Threads
         new Thread(window).start();
         new Thread(audio).start();
+        // Get number of active threads
+        System.out.println(Thread.activeCount());
     }
 }

@@ -7,6 +7,7 @@ public class LFO extends Carrier {
         setType("SINE");
         setFrequency(440);
         setWave(new Sine());
+        setSamples(wave.getByteArray());
     }
 
     public LFO(int HZ) {

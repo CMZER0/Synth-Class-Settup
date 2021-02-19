@@ -60,4 +60,13 @@ class Sine {
         return wave;
     }
 
+    public byte[] getByteArray() {
+        byte[] rawOut = new byte[waveData.length];
+        for (int i = 0; i < waveData.length; i++) {
+            rawOut[i] = (byte) (waveData[i] * 100);
+            System.out.println(((byte) rawOut[i]));
+        }
+        return rawOut;
+    }
+
 }
